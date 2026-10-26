@@ -26,3 +26,12 @@ class Country:
         else:
             return 9
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "population": self.population,
+            "owner": self.owner,
+            "base_soldier_value": self.base_soldier_value,
+            "soldiers": self.soldiers
+        }
+
