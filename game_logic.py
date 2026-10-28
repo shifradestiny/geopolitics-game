@@ -125,3 +125,28 @@ class Game:
         elif player_count == 0 or npc_count == 10:
             self.game_over = True
             self.winner = "npc"
+
+    # Computers turn
+    def npc_turn(self):
+        if self.game_over == True:
+            return None
+
+        # Temp lists
+        npc_countries = []
+        player_countries = []
+
+        for player_type in self.countries:
+            if player_type.owner == "npc":
+                npc_countries.append(player_type)
+            elif player_type.owner == "player":
+                player_countries.append(player_type)
+
+        npc_attacker = random.choice(npc_countries)
+        player_defender = random.choice(player_countries)
+
+        self.battle(npc_attacker, player_defender)
+
+        return {
+            "npc_attacker": npc_attacker,
+            "player_defender": player_defender
+        }
