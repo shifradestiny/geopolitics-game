@@ -7,6 +7,7 @@ class Country:
         self.base_soldier_value = self.initial_soldiers()
         self.soldiers = self.base_soldier_value
 
+    ## Assign soldiers based on population size
     def initial_soldiers(self):
         if self.population <= 5:
             return 1
@@ -27,6 +28,7 @@ class Country:
         else:
             return 9
 
+    ## Format values for JSON
     def to_dict(self):
         return {
             "name": self.name,
@@ -51,8 +53,36 @@ class Game:
             Country("Japan", 125, "npc")
         ]
 
+        ## Choose random country to be the starting player
         starting_country = random.choice(self.countries)
         starting_country.owner = "player"
 
         self.game_over = False
         self.winner = None
+
+    def battle(self, attacker, defender):
+        attacker_dice = []
+        for i in range(attacker.soldiers):
+            attacker_dice.append(random.randint(1, 6))
+
+        defender_dice = []
+        for i in range(defender.soldiers):
+            defender_dice.append(random.randint(1, 6))
+
+        ## Sort dice rolls in descending order for comparison
+        attacker_dice.sort(reverse=True)
+        defender_dice.sort(reverse=True)
+
+        compare_rolls = min(len(attacker_dice), len(defender_dice))
+
+        for i in range(compare_rolls):
+            if attacker_dice[i] > defender_dice[i]:
+                defender.soldiers -= 1
+            else:
+                attacker.soldiers -= 1
+
+        ## Format values for JSON
+        return {
+            "attacker_dice": attacker_dice,
+            "defender_dice": defender_dice
+        }
