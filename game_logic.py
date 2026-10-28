@@ -97,9 +97,31 @@ class Game:
         else:
             captured = False
 
+        # Checks for a winner after each battle
+        self.verify_winner()
+
         # Format values for JSON
         return {
             "attacker_dice": attacker_dice,
             "defender_dice": defender_dice,
             "captured": captured
         }
+
+    def verify_winner(self):
+        player_count = 0
+        npc_count = 0
+
+        for country in self.countries:
+            # Update the number of players/npc's after each battle
+            if country.owner == "player":
+                player_count += 1
+            elif country.owner == "npc":
+                npc_count += 1
+
+        # End the game if either side is 10 or 0 and define a winner
+        if player_count == 10 or npc_count == 0:
+            self.game_over = True
+            self.winner = "player"
+        elif player_count == 0 or npc_count == 10:
+            self.game_over = True
+            self.winner = "npc"
