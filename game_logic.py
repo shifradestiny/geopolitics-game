@@ -153,3 +153,22 @@ class Game:
             "player_defender": player_defender.name,
             "battle_result": battle_result
         }
+
+    # Find a specific country and return its attributes to battle()
+    def find_country(self, country_name):
+        for country in self.countries:
+            if country.name == country_name:
+                return country
+        return None
+
+    # Create a full list of countries 
+    def get_board_state(self):
+        country_list = []
+        for country in self.countries:
+            country_list.append(country.to_dict())
+
+        return {
+            "country_list": country_list,
+            "game_over": self.game_over,
+            "winner": self.winner
+        }
