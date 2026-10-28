@@ -1,10 +1,13 @@
-from flask import Flask
+from flask import Flask, jsonify, render_template, request
+from game_logic import Game
 
 app = Flask(__name__)
+game = Game()
 
-@app.route('/')
-def home():
-    return "<h1>Geopolitics Game Engine Online</h1>"
+# Send data from the game to the browser as JSON
+@app.route("/game_state")
+def game_state():
+    return jsonify(game.get_board_state())
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)  # Start 
