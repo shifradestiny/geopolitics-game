@@ -144,9 +144,12 @@ class Game:
         npc_attacker = random.choice(npc_countries)
         player_defender = random.choice(player_countries)
 
-        self.battle(npc_attacker, player_defender)
+        # Store result to get its dictionary
+        battle_result = self.battle(npc_attacker, player_defender)
 
+        # Format values for JSON
         return {
-            "npc_attacker": npc_attacker,
-            "player_defender": player_defender
+            "npc_attacker": npc_attacker.name,
+            "player_defender": player_defender.name,
+            "battle_result": battle_result
         }
