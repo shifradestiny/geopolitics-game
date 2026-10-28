@@ -1,3 +1,4 @@
+import random
 class Country:
     def __init__(self, name, population, owner):
         self.name = name
@@ -35,3 +36,23 @@ class Country:
             "soldiers": self.soldiers
         }
 
+class Game:
+    def __init__(self):
+        self.countries = [
+            Country("South Africa", 60, "npc"),
+            Country("Chile", 20, "npc"),
+            Country("Brazil", 215, "npc"),
+            Country("Uganda", 53, "npc"),
+            Country("Egypt", 110, "npc"),
+            Country("Germany", 84, "npc"),
+            Country("France", 68, "npc"),
+            Country("India", 1400, "npc"),
+            Country("New Zealand", 5, "npc"),
+            Country("Japan", 125, "npc")
+        ]
+
+        starting_country = random.choice(self.countries)
+        starting_country.owner = "player"
+
+        self.game_over = False
+        self.winner = None
