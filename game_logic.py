@@ -7,7 +7,7 @@ class Country:
         self.base_soldier_value = self.initial_soldiers()
         self.soldiers = self.base_soldier_value
 
-    ## Assign soldiers based on population size
+    # Assign soldiers based on population size
     def initial_soldiers(self):
         if self.population <= 5:
             return 1
@@ -28,7 +28,7 @@ class Country:
         else:
             return 9
 
-    ## Format values for JSON
+    # Format values for JSON
     def to_dict(self):
         return {
             "name": self.name,
@@ -53,7 +53,7 @@ class Game:
             Country("Japan", 125, "npc")
         ]
 
-        ## Choose random country to be the starting player
+        # Choose random country to be the starting player
         starting_country = random.choice(self.countries)
         starting_country.owner = "player"
 
@@ -69,7 +69,7 @@ class Game:
         for i in range(defender.soldiers):
             defender_dice.append(random.randint(1, 6))
 
-        ## Sort dice rolls in descending order for comparison
+        # Sort dice rolls in descending order for comparison
         attacker_dice.sort(reverse=True)
         defender_dice.sort(reverse=True)
 
@@ -81,8 +81,25 @@ class Game:
             else:
                 attacker.soldiers -= 1
 
-        ## Format values for JSON
+        captured = False
+
+        # Handles when soldiers are captured on either side
+        if defender.soldiers <= 0:
+            captured = True
+            defender.owner = attacker.owner  # Being captured shifts ownership
+            defender.soldiers = defender.base_soldier_value
+            attacker.soldiers += 1
+        elif attacker.soldiers <= 0:
+            captured = True
+            attacker.owner = defender.owner  # Being captured shifts ownership
+            attacker.soldiers = attacker.base_soldier_value
+            defender.soldiers += 1
+        else:
+            captured = False
+
+        # Format values for JSON
         return {
             "attacker_dice": attacker_dice,
-            "defender_dice": defender_dice
+            "defender_dice": defender_dice,
+            "captured": captured
         }
