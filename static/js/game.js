@@ -1,3 +1,6 @@
+let selectedAttacker = null;
+let selectedDefender = null;
+
 // Fetch data from Flask route
 function loadGameState() {
   fetch("/game_state")
@@ -23,8 +26,22 @@ function renderBoard(gameState) {
             <p>Population: ${country.population} Million</p>
         `;
 
+    card.addEventListener("click", () => {
+      selectCountry(country);
+    });
+
     board.appendChild(card);
   });
+}
+
+function selectCountry(country) {
+  if (country.owner === "player") {
+    selectedAttacker = country.name;
+    document.getElementById("selected-attacker").textContent = selectedAttacker;
+  } else if (country.owner === "npc") {
+    selectedDefender = country.name;
+    document.getElementById("selected-defender").textContent = selectedDefender;
+  }
 }
 
 // Run upon loading page
