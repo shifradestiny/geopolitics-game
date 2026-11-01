@@ -40,7 +40,7 @@ def npc_turn():
     })
 
 # Reset game to its original state
-@app.route("reset", methods=["POST"])
+@app.route("/reset", methods=["POST"])
 def reset():
     global game
     game = Game()
