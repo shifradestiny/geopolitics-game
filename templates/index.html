@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geopolitics Game</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <h1>Geopolitics Game</h1>
+    <p id="game-status">Select a country to attack from and an enemy target</p>
+
+    <!-- Panel for selctions and buttons -->
+    <div id="controls">
+      <p>
+        <strong>Attacker:</strong> <span id="selected-attacker">None</span>
+        <strong>Defender:</strong> <span id="selected-defender">None</span>
+      </p>
+
+      <button id="attack-btn">Attack</button>
+      <button id="end-turn-btn">End Turn</button>
+      <button id="reset-btn">Reset Game</button>
+    </div>
+
+    <!-- Dice rolls and battle outcomes -->
+    <div id="battle-log"></div>
+
+    <!-- Country cards -->
+    <div id="board"></div>
+
+    <script src="/static/js/game.js"></script>
+  </body>
+</html>
