@@ -167,6 +167,7 @@ class Game:
         for country in self.countries:
             country_list.append(country.to_dict())
 
+        # Format values for JSON
         return {
             "country_list": country_list,
             "game_over": self.game_over,

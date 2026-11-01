@@ -4,10 +4,50 @@ from game_logic import Game
 app = Flask(__name__)
 game = Game()
 
+# Load main page of game
+@app.route("/")
+def index():
+    return render_template("index.html")
+
 # Send data from the game to the browser as JSON
 @app.route("/game_state")
 def game_state():
     return jsonify(game.get_board_state())
+
+# Receive country details from the browser to start the battle 
+@app.route("/attack", methods=["POST"])
+def attack():
+    data = request.get_json()
+
+    attacker = game.find_country(data["attacker"])
+    defender = game.find_country(data["defender"])
+
+    battle_outcome = game.battle(attacker, defender)
+
+    return jsonify({
+        "battle_outcome": battle_outcome,
+        "game_state": game.get_board_state()
+    })
+
+# Run npc turn abd return game state
+@app.route("/npc_turn", methods=["POST"])
+def npc_turn():
+    npc_outcome = game.npc_turn()
+
+    return jsonify({
+        "npc_outcome": npc_outcome,
+        "game_state": game.get_board_state()
+    })
+
+# Reset game to its original state
+@app.route("reset", methods=["POST"])
+def reset():
+    global game
+    game = Game()
+
+    return jsonify({
+        "game_state": game.get_board_state()
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)  # Start 
