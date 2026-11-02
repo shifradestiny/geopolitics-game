@@ -10,6 +10,7 @@ body {
   margin-bottom: 6px;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .country-card h3 {
@@ -97,4 +98,14 @@ button {
 
 #right-panel {
   flex: 1;
+}
+
+.player:hover,
+#attack-btn:hover {
+  box-shadow: 0 0 12px rgba(255, 121, 198, 0.5);
+}
+
+.npc:hover,
+#end-turn-btn:hover {
+  box-shadow: 0 0 12px rgba(80, 250, 123, 0.5);
 }
