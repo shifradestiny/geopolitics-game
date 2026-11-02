@@ -44,5 +44,70 @@ function selectCountry(country) {
   }
 }
 
+function attackCountry() {
+  const battleLog = document.getElementById("battle-log");
+
+  // Ensure attacker and defender are selected
+  if (!selectedAttacker || !selectedDefender) {
+    battleLog.innerHTML =
+      "<p>Please select both an attacker and a defender.</p>";
+    return;
+  }
+
+  // Send POST request
+  fetch("/attack", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      attacker: selectedAttacker,
+      defender: selectedDefender,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const result = data.battle_outcome;
+
+      if (result.error) {
+        battleLog.innerHTML = `<p>${result.error}</p>`;
+      } else {
+        battleLog.innerHTML = `
+        <p>Attacker Rolls: ${result.attacker_dice}</p>
+        <p>Defender Rolls: ${result.defender_dice}</p>
+        <p>Attacker Loss: ${result.attacker_loss}</p>
+        <p>Defender Loss: ${result.defender_loss}</p>
+        <p>Captured: ${result.captured}</p>
+        `;
+      }
+
+      // Update the game state
+      renderBoard(data.game_state);
+    });
+}
+
+document.getElementById("attack-btn").addEventListener("click", attackCountry);
+
+function resetGame() {
+  fetch("/reset", {
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      selectedAttacker = null;
+      selectedDefender = null;
+
+      document.getElementById("selected-attacker").textContent = "None";
+      document.getElementById("selected-defender").textContent = "None";
+
+      document.getElementById("battle-log").innerHTML = "";
+
+      // Update the game state
+      renderBoard(data.game_state);
+    });
+}
+
+document.getElementById("reset-btn").addEventListener("click", resetGame);
+
 // Run upon loading page
 loadGameState();
