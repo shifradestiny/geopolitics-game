@@ -30,7 +30,7 @@ function renderBoard(gameState) {
 
     card.innerHTML = `
             <h3>${country.name}</h3>
-            <p>Owner: ${country.owner}</p>
+            <p>Owner: ${country.owner.toUpperCase()}</p>
             <p>Soldiers: ${country.soldiers}</p>
             <p>Population: ${country.population} Million</p>
         `;
@@ -109,7 +109,8 @@ function resetGame() {
       document.getElementById("selected-attacker").textContent = "None";
       document.getElementById("selected-defender").textContent = "None";
 
-      document.getElementById("battle-log").innerHTML = "";
+      document.getElementById("battle-log").innerHTML =
+        "<p>Awaiting orders. Select an attacker ad a defender to launch an attack.";
 
       // Update the game state
       renderBoard(data.game_state);

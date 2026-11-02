@@ -10,23 +10,32 @@
     <h1>Geopolitics Game</h1>
     <p id="game-status">Select a country to attack from and an enemy target</p>
 
-    <!-- Panel for selctions and buttons -->
-    <div id="controls">
-      <p>
-        <strong>Attacker:</strong> <span id="selected-attacker">None</span>
-        <strong>Defender:</strong> <span id="selected-defender">None</span>
-      </p>
+    <div id="game-container">
+      <!-- Country cards -->
+      <div id="board"></div>
 
-      <button id="attack-btn">Attack</button>
-      <button id="end-turn-btn">End Turn</button>
-      <button id="reset-btn">Reset Game</button>
+      <div id="right-panel">
+        <!-- Panel for selctions and buttons -->
+        <div id="controls">
+          <p>
+            <strong>Attacker:</strong> <span id="selected-attacker">None</span>
+            <strong>Defender:</strong> <span id="selected-defender">None</span>
+          </p>
+
+          <button id="attack-btn">Attack</button>
+          <button id="end-turn-btn">End Turn</button>
+          <button id="reset-btn">Reset Game</button>
+        </div>
+
+        <!-- Dice rolls and battle outcomes -->
+        <div id="battle-log">
+          <p>
+            Awaiting orders. Select an attacker ad a defender to launch an
+            attack.
+          </p>
+        </div>
+      </div>
     </div>
-
-    <!-- Dice rolls and battle outcomes -->
-    <div id="battle-log"></div>
-
-    <!-- Country cards -->
-    <div id="board"></div>
 
     <script src="/static/js/game.js"></script>
   </body>
