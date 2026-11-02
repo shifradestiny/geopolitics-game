@@ -88,7 +88,7 @@ button {
 
 #board {
   width: 284px;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
   padding-right: 8px;
   display: grid;
@@ -108,4 +108,12 @@ button {
 .npc:hover,
 #end-turn-btn:hover {
   box-shadow: 0 0 12px rgba(80, 250, 123, 0.5);
+}
+
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-radius: 2px;
 }

@@ -28,8 +28,11 @@ function renderBoard(gameState) {
     const card = document.createElement("div");
     card.className = "country-card " + country.owner;
 
+    // Convert names to lowercase
+    const flagFile = country.name.toLowerCase().replace(" ", "_");
+
     card.innerHTML = `
-            <h3>${country.name}</h3>
+            <h3><img src="/static/images/flags/${flagFile}.svg" class="flag-icon">${country.name}</h3>
             <p>Owner: ${country.owner.toUpperCase()}</p>
             <p>Soldiers: ${country.soldiers}</p>
             <p>Population: ${country.population} Million</p>
