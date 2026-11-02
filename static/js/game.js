@@ -109,5 +109,34 @@ function resetGame() {
 
 document.getElementById("reset-btn").addEventListener("click", resetGame);
 
+function endTurn() {
+  fetch("/npc_turn", {
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const npc = data.npc_outcome;
+      const battleLog = document.getElementById("battle-log");
+
+      if (!npc || npc.error) {
+        battleLog.innerHTML = "<p>NPC could not make a move.</p>";
+      } else {
+        const result = npc.battle_result;
+        battleLog.innerHTML = `
+        <p><strong>NPC Turn: ${npc.npc_attacker} attacked ${npc.player_defender}</strong></p>
+        <p>NPC Attacker: ${npc.npc_attacker}</p>
+        <p>Player Defender: ${npc.player_defender}</p>
+        <p>NPC Rolls: ${result.attacker_dice}</p>
+        <p>Player Rolls: ${result.defender_dice}</p>
+        <p>Captured: ${result.captured}</p>
+        `;
+      }
+    });
+
+  renderBoard(data.game_state);
+}
+
+document.getElementById("end-turn-btn").addEventListener("click", endTurn);
+
 // Run upon loading page
 loadGameState();
