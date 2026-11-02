@@ -33,9 +33,7 @@ function renderBoard(gameState) {
 
     card.innerHTML = `
             <h3><img src="/static/images/flags/${flagFile}.svg" class="flag-icon">${country.name}</h3>
-            <p>Owner: ${country.owner.toUpperCase()}</p>
-            <p>Soldiers: ${country.soldiers}</p>
-            <p>Population: ${country.population} Million</p>
+            <p><img src="/static/images/icons/soldier.svg" class="soldier-icon"> ${country.soldiers}</p>
         `;
 
     card.addEventListener("click", () => {

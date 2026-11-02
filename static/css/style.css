@@ -21,15 +21,19 @@ body {
 .country-card p {
   margin: 0;
   font-size: 12px;
-  color: #8b9bb4;
+  color: #ffffff;
 }
 
 .player {
   border: 2px solid #ff79c6;
+  background-color: rgba(255, 121, 198, 0.25);
+  box-shadow: 0 0 10px rgba(255, 121, 198, 0.18);
 }
 
 .npc {
-  border: 2px solid #50fa7b;
+  border: 2px solid #79fa99;
+  background-color: rgba(121, 250, 153, 0.25);
+  box-shadow: 0 0 10px rgba(121, 250, 153, 0.18);
 }
 
 #controls {
@@ -54,7 +58,7 @@ body {
 }
 
 #selected-defender {
-  color: #50fa7b;
+  color: #79fa99;
 }
 
 button {
@@ -72,7 +76,7 @@ button {
 }
 
 #end-turn-btn {
-  background-color: #50fa7b;
+  background-color: #79fa99;
   color: #0b0f19;
 }
 
@@ -86,28 +90,18 @@ button {
   gap: 20px;
 }
 
-#board {
-  width: 284px;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding-right: 8px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
 #right-panel {
   flex: 1;
 }
 
 .player:hover,
 #attack-btn:hover {
-  box-shadow: 0 0 12px rgba(255, 121, 198, 0.5);
+  box-shadow: 0 0 16px rgba(255, 121, 198, 0.4);
 }
 
 .npc:hover,
 #end-turn-btn:hover {
-  box-shadow: 0 0 12px rgba(80, 250, 123, 0.5);
+  box-shadow: 0 0 16px rgba(121, 250, 153, 0.4);
 }
 
 .flag-icon {
@@ -116,4 +110,11 @@ button {
   margin-right: 6px;
   vertical-align: middle;
   border-radius: 2px;
+}
+
+.soldier-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  vertical-align: middle;
 }
