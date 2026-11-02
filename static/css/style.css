@@ -1,0 +1,69 @@
+body {
+  background-color: #11151c;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.country-card {
+  background-color: #131a2a;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.player {
+  border: 2px solid #ff79c6;
+}
+
+.npc {
+  border: 2px solid #50fa7b;
+}
+
+#controls {
+  background-color: #131a2a;
+  border: 1px solid #1f293d;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+#battle-log {
+  background-color: #131a2a;
+  border: 1px solid #1f293d;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+#selected-attacker {
+  color: #ff79c6;
+}
+
+#selected-defender {
+  color: #50fa7b;
+}
+
+button {
+  padding: 10px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#attack-btn {
+  background-color: #ff79c6;
+  color: #0b0f19;
+}
+
+#end-turn-btn {
+  background-color: #50fa7b;
+  color: #0b0f19;
+}
+
+#reset-btn {
+  background-color: #1f293d;
+  color: #ffffff;
+}
