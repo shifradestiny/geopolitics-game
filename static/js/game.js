@@ -15,6 +15,15 @@ function renderBoard(gameState) {
   const board = document.getElementById("board");
   board.innerHTML = ""; // Clear any previous information
 
+  const statusText = document.getElementById("game-status");
+
+  if (gameState.game_over) {
+    statusText.textContent = "Game Over! Winner " + gameState.winner;
+  } else {
+    statusText.textContent =
+      "Select a country to attack from and an enemy target.";
+  }
+
   gameState.country_list.forEach((country) => {
     const card = document.createElement("div");
     card.className = "country-card " + country.owner;
