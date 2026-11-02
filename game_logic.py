@@ -75,11 +75,17 @@ class Game:
 
         compare_rolls = min(len(attacker_dice), len(defender_dice))
 
+        # Track soldier losses on either side
+        attacker_loss = 0
+        defender_loss = 0
+
         for i in range(compare_rolls):
             if attacker_dice[i] > defender_dice[i]:
                 defender.soldiers -= 1
+                defender_loss += 1
             else:
                 attacker.soldiers -= 1
+                attacker_loss =+ 1
 
         captured = False
 
@@ -104,6 +110,8 @@ class Game:
         return {
             "attacker_dice": attacker_dice,
             "defender_dice": defender_dice,
+            "attacker_loss": attacker_loss,
+            "defender_loss": defender_loss,
             "captured": captured
         }
 
