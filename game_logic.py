@@ -85,7 +85,7 @@ class Game:
                 defender_loss += 1
             else:
                 attacker.soldiers -= 1
-                attacker_loss =+ 1
+                attacker_loss += 1
 
         captured = False
 
