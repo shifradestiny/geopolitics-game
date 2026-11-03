@@ -103,6 +103,12 @@ class Game:
         else:
             captured = False
 
+        # AI Commentary
+        commentary = f"BATTLE ENGAGED: {attacker.name} attacks {defender.name}! Attacker lost {attacker_loss}, Defender lost {defender_loss}."
+
+        if captured: 
+            commentary += f" territory was captured."
+
         # Checks for a winner after each battle
         self.verify_winner()
 
@@ -112,7 +118,8 @@ class Game:
             "defender_dice": defender_dice,
             "attacker_loss": attacker_loss,
             "defender_loss": defender_loss,
-            "captured": captured
+            "captured": captured,
+            "commentary": commentary
         }
 
     def verify_winner(self):
@@ -152,6 +159,14 @@ class Game:
         npc_attacker = random.choice(npc_countries)
         player_defender = random.choice(player_countries)
 
+        # BOT LOGIC 
+        if npc_attacker.soldiers > player_defender.soldiers:
+            reasoning = f"BOT LOGIC: Selected {npc_attacker.name} ({npc_attacker.soldiers} soldiers) against {player_defender.name} ({player_defender.soldiers} soldiers)."
+        elif npc_attacker.soldiers == player_defender.soldiers:
+            reasoning = f"BOT LOGIC: Matched {npc_attacker.name} ({npc_attacker.soldiers} soldiers) with {player_defender.name} ({player_defender.soldiers} soldiers) in an evenly matched clash."
+        else:
+            reasoning = f"BOT LOGIC: Launched {npc_attacker.name} ({npc_attacker.soldiers} soldiers) to tire {player_defender.name} ({player_defender.soldiers} soldiers) soldiers."
+
         # Store result to get its dictionary
         battle_result = self.battle(npc_attacker, player_defender)
 
@@ -159,7 +174,8 @@ class Game:
         return {
             "npc_attacker": npc_attacker.name,
             "player_defender": player_defender.name,
-            "battle_result": battle_result
+            "battle_result": battle_result,
+            "reasoning": reasoning
         }
 
     # Find a specific country and return its attributes to battle()

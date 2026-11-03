@@ -83,6 +83,7 @@ function attackCountry() {
         battleLog.innerHTML = `<p>${result.error}</p>`;
       } else {
         battleLog.innerHTML = `
+        <p>${result.commentary}</p>
         <p>Attacker Rolls: ${result.attacker_dice}</p>
         <p>Defender Rolls: ${result.defender_dice}</p>
         <p>Attacker Loss: ${result.attacker_loss}</p>
@@ -134,6 +135,8 @@ function endTurn() {
       } else {
         const result = npc.battle_result;
         battleLog.innerHTML = `
+        <p><strong>${npc.reasoning}</strong></p>
+        <p><strong>${result.commentary}</strong></p>
         <p><strong>NPC Turn: ${npc.npc_attacker} attacked ${npc.player_defender}</strong></p>
         <p>NPC Attacker: ${npc.npc_attacker}</p>
         <p>Player Defender: ${npc.player_defender}</p>
@@ -142,9 +145,8 @@ function endTurn() {
         <p>Captured: ${result.captured}</p>
         `;
       }
+      renderBoard(data.game_state);
     });
-
-  renderBoard(data.game_state);
 }
 
 document.getElementById("end-turn-btn").addEventListener("click", endTurn);
