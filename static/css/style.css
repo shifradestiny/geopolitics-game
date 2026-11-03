@@ -37,8 +37,9 @@ h1 {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(2, 150px);
-  gap: 10px;
+  grid-template-columns: repeat(2, 155px);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 12px;
   align-content: start;
   background-color: #111622;
   border: 1px solid #1f293d;
@@ -48,22 +49,25 @@ h1 {
 
 .country-card {
   background-color: #131a2a;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .country-card h3 {
-  margin: 0 0 6px 0;
-  font-size: 14px;
+  margin: 0 0 8px 0;
+  font-size: 15px;
   letter-spacing: 0.5px;
 }
 
 .country-card p {
   margin: 0;
   font-family: "JetBrains Mono", "Consolas", monospace;
-  font-size: 12px;
+  font-size: 13px;
   color: #ffffff;
 }
 
@@ -80,8 +84,11 @@ h1 {
 }
 
 .world-map-container {
-  flex: 1.4;
-  background-color: #111622;
+  flex: 1.5;
+  background-color: #0d121d;
+  background-image:
+    linear-gradient(rgba(31, 41, 61, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 41, 61, 0.35) 1px, transparent 1px);
   border: 1px solid #1f293d;
   border-radius: 10px;
   padding: 12px;
@@ -96,12 +103,16 @@ h1 {
   border: 1px solid #1f293d;
   padding: 18px;
   border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #controls p {
-  margin: 0 0 14px 0;
+  margin: 0 0 8px 0;
   font-size: 15px;
   letter-spacing: 0.5px;
+  width: 100%;
 }
 
 #battle-log {
@@ -133,12 +144,14 @@ h1 {
 }
 
 button {
+  flex: 1;
+  min-width: 105px;
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 10px 16px;
-  margin-right: 8px;
+  padding: 10px 12px;
+  margin: 0;
   border: none;
   border-radius: 6px;
   font-weight: 700;
