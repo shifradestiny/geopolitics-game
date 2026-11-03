@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Geopolitics Game</title>
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Geopolitics Game</h1>
-    <p id="game-status">Select a country to attack from and an enemy target</p>
+    <header class="top-bar">
+      <h1>Geopolitics Game</h1>
+      <p id="game-status">
+        Select a country to attack from and an enemy target
+      </p>
+    </header>
 
     <div id="game-container">
       <!-- Country cards -->
@@ -39,7 +49,7 @@
         <!-- Dice rolls and battle outcomes -->
         <div id="battle-log">
           <p>
-            Awaiting orders. Select an attacker ad a defender to launch an
+            Awaiting orders. Select an attacker and a defender to launch an
             attack.
           </p>
         </div>
