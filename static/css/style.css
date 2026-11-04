@@ -91,11 +91,32 @@ h1 {
     linear-gradient(90deg, rgba(31, 41, 61, 0.35) 1px, transparent 1px);
   border: 1px solid #1f293d;
   border-radius: 10px;
-  padding: 12px;
+  padding: 14px 18px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
+}
+
+.map-hud-header,
+.map-hud-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #64748b;
+  padding: 6px 0;
+  border-bottom: 1px solild #1f293d;
+}
+
+.map-hud-footer {
+  border-bottom: none;
+  border-top: 1px solid #1f293d;
+}
+
+.hud-live {
+  color: #79fa99;
 }
 
 #controls {
@@ -220,8 +241,8 @@ button {
 
 .tactical-map-img {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   object-fit: contain;
   border-radius: 6px;
-  opacity: 0.9;
 }
