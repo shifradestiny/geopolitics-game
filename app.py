@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, session, redirect, url_for
 from game_logic import Game
+from database import db
+import os
 
 app = Flask(__name__)
 game = Game()
+app.secret_key = os.urandom(24)
 
 # Load main page of game
 @app.route("/")
@@ -48,6 +51,38 @@ def reset():
     return jsonify({
         "game_state": game.get_board_state()
     })
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if db.register_user(username, password):
+            return redirect(url_for("login"))
+        else:
+            return "Username already being used. Please try a different username.", 400
+
+    return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if db.verify_user(username, password):
+            session["username"] = username
+            return redirect(url_for("index"))
+        else:
+            return "Invalid login details.", 401
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return redirect(url_for("login"))
 
 if __name__ == "__main__":
     app.run(debug=True)  # Start 
