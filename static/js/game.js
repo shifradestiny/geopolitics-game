@@ -80,15 +80,15 @@ function attackCountry() {
       const result = data.battle_outcome;
 
       if (result.error) {
-        battleLog.innerHTML = `<p>${result.error}</p>`;
+        battleLog.innerHTML = `${result.error}<br />`;
       } else {
         battleLog.innerHTML = `
-        <p>${result.commentary}</p>
-        <p>Attacker Rolls: ${result.attacker_dice}</p>
-        <p>Defender Rolls: ${result.defender_dice}</p>
-        <p>Attacker Loss: ${result.attacker_loss}</p>
-        <p>Defender Loss: ${result.defender_loss}</p>
-        <p>Captured: ${result.captured}</p>
+        ${result.commentary}<br /><br />
+        Attacker Rolls: ${result.attacker_dice}<br />
+        Defender Rolls: ${result.defender_dice}<br />
+        Attacker Loss: ${result.attacker_loss}<br />
+        Defender Loss: ${result.defender_loss}<br />
+        Captured: ${result.captured}<br />
         `;
       }
 
@@ -112,7 +112,7 @@ function resetGame() {
       document.getElementById("selected-defender").textContent = "None";
 
       document.getElementById("battle-log").innerHTML =
-        "<p>Awaiting orders. Select an attacker ad a defender to launch an attack.";
+        "Awaiting orders. Select an attacker ad a defender to launch an attack.";
 
       // Update the game state
       renderBoard(data.game_state);
@@ -122,7 +122,7 @@ function resetGame() {
 document.getElementById("reset-btn").addEventListener("click", resetGame);
 
 function endTurn() {
-  fetch("/npc_turn", {
+  fetch("/end_turn", {
     method: "POST",
   })
     .then((response) => response.json())
@@ -131,18 +131,18 @@ function endTurn() {
       const battleLog = document.getElementById("battle-log");
 
       if (!npc || npc.error) {
-        battleLog.innerHTML = "<p>NPC could not make a move.</p>";
+        battleLog.innerHTML = "NPC could not make a move.<br />";
       } else {
         const result = npc.battle_result;
         battleLog.innerHTML = `
-        <p><strong>${npc.reasoning}</strong></p>
-        <p><strong>${result.commentary}</strong></p>
-        <p><strong>NPC Turn: ${npc.npc_attacker} attacked ${npc.player_defender}</strong></p>
-        <p>NPC Attacker: ${npc.npc_attacker}</p>
-        <p>Player Defender: ${npc.player_defender}</p>
-        <p>NPC Rolls: ${result.attacker_dice}</p>
-        <p>Player Rolls: ${result.defender_dice}</p>
-        <p>Captured: ${result.captured}</p>
+        <strong>${npc.reasoning}</strong><br />
+        <strong>${result.commentary}</strong><br />
+        <strong>NPC Turn: ${npc.npc_attacker} attacked ${npc.player_defender}</strong><br />
+        NPC Attacker: ${npc.npc_attacker}<br />
+        Player Defender: ${npc.player_defender}<br />
+        NPC Rolls: ${result.attacker_dice}<br />
+        Player Rolls: ${result.defender_dice}<br />
+        Captured: ${result.captured}<br />
         `;
       }
       renderBoard(data.game_state);
