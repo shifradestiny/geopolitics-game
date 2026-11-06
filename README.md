@@ -12,7 +12,8 @@ A fullstack web based application that uses dynamic database management, busines
 
 ## Live Application
 
-**The game can be played here:**
+**The game can be played here:** [https://shifradestiny.pythonanywhere.com/](https://shifradestiny.pythonanywhere.com/)
+**Github Repo:** [https://github.com/shifradestiny/geopolitics-game](https://github.com/shifradestiny/geopolitics-game)
 
 ## Core Mechanics and Implemented Rules
 
