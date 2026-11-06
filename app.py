@@ -10,6 +10,10 @@ app.secret_key = os.urandom(24)
 # Load main page of game
 @app.route("/")
 def index():
+    # Login before enetering main page
+    if "username" not in session:
+        return redirect(url_for("login"))
+    
     return render_template("index.html")
 
 # Send data from the game to the browser as JSON

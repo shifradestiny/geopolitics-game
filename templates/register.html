@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geopolitics Game - Login</title>
+    <link rel="stylesheet" href="/static/css/register_style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Geopolitics Game - Create Account</h2>
+      <form action="/login" method="POST">
+        <input
+          type="text"
+          name="username"
+          placeholder="Choose a Username"
+          required
+        /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Choose a Password"
+          required
+        /><br />
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="/login">Login here!</a></p>
+    </div>
+  </body>
+</html>
