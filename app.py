@@ -36,11 +36,11 @@ def attack():
         "game_state": game.get_board_state()
     })
 
-# Run npc turn abd return game state
-@app.route("/npc_turn", methods=["POST"])
-def npc_turn():
+# Skip turn
+@app.route("/end_turn", methods=["POST"])
+def end_turn():
     npc_outcome = game.npc_turn()
-
+    game.apply_reinforce("player")
     return jsonify({
         "npc_outcome": npc_outcome,
         "game_state": game.get_board_state()

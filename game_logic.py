@@ -1,4 +1,21 @@
 import random
+import math
+from google import genai
+
+client = genai.Client(api_key="AQ.Ab8RN6LZoC7UXNhCPbtqT6CUynYpXNt2jjgz-SSlLkfUzUXkVw")
+
+def generate_commentary(attacker, defender, attacker_loss, defender_loss, captured):
+    prompt = f"Write a one-sentence dramatic commentary for a gam where {attacker} attacked {defender}. Attacker lost {attacker_loss} soldiers, defender lost {defender_loss}. Territory captured: {captured}. Keep it under 15-20 words."
+    try:
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=prompt
+        )
+        return response.text.strip()
+    # If AI limit is reached or does not connect
+    except:
+        return f"BATLLE ENGAGED: {attacker} attacks {defender}! Attacker lost {attacker_loss}, defender lost {defender_loss}."
+
 class Country:
     def __init__(self, name, population, owner):
         self.name = name
@@ -98,21 +115,18 @@ class Game:
         if defender.soldiers <= 0:
             captured = True
             defender.owner = attacker.owner  # Being captured shifts ownership
-            defender.soldiers = max(1, attacker.soldiers - 1)
+            
+            # Calculate reinforcement bonus
+            bonus = max(2, math.floor(defender.base_soldier_value / 2))
+
+            defender.soldiers = max(1, attacker.soldiers - 1) + bonus
             attacker.soldiers = 1
         elif attacker.soldiers <= 0:
-            captured = True
-            attacker.owner = defender.owner  # Being captured shifts ownership
-            attacker.soldiers = max(1, defender.soldiers - 1)
-            defender.soldiers = 1
-        else:
             captured = False
+            attacker.soldiers = 1 # Retain territory with 1 soldier
 
         # AI Commentary
-        commentary = f"BATTLE ENGAGED: {attacker.name} attacks {defender.name}! Attacker lost {attacker_loss}, Defender lost {defender_loss}."
-
-        if captured: 
-            commentary += f" territory was captured."
+        commentary = generate_commentary(attacker.name, defender.name, attacker_loss, defender_loss, captured)
 
         # Checks for a winner after each battle
         self.verify_winner()
@@ -146,10 +160,22 @@ class Game:
             self.game_over = True
             self.winner = "npc"
 
+    def apply_reinforce(self, owner_type):
+        controlled_countries = [c for c in self.countries if c.owner == owner_type]
+        reinforcements = len(controlled_countries) * 2
+
+        if reinforcements > 0:
+            controlled_countries.sort(key=lambda c: c.soldiers, reverse=True)
+            controlled_countries[0].soldiers += reinforcements
+
+        return reinforcements
+
     # Computers turn
     def npc_turn(self):
         if self.game_over == True:
             return None
+
+        self.apply_reinforce("npc")
 
         # Temp lists
         npc_countries = []
