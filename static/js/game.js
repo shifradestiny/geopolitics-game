@@ -90,6 +90,8 @@ function attackCountry() {
         Defender Loss: ${result.defender_loss}<br />
         Captured: ${result.captured}<br />
         `;
+
+        renderDice(result.attacker_dice, result.defender_dice);
       }
 
       // Update the game state
@@ -144,6 +146,8 @@ function endTurn() {
         Player Rolls: ${result.defender_dice}<br />
         Captured: ${result.captured}<br />
         `;
+
+        renderDice(result.attacker_dice, result.defender_dice);
       }
       renderBoard(data.game_state);
     });
@@ -153,3 +157,31 @@ document.getElementById("end-turn-btn").addEventListener("click", endTurn);
 
 // Run upon loading page
 loadGameState();
+
+function renderDice(attackerDiceArray, defenderDiceArray) {
+  const arena = document.getElementById("dice-arena");
+  if (!arena) return;
+
+  arena.innerHTML = "";
+
+  const attackerRow = document.createElement("div");
+  attackerRow.className = "dice-container";
+  attackerDiceArray.forEach((val) => {
+    const die = document.createElement("div");
+    die.className = "die-attacker";
+    die.textContent = val;
+    attackerRow.appendChild(die);
+  });
+
+  const defenderRow = document.createElement("div");
+  defenderRow.className = "dice-container";
+  defenderDiceArray.forEach((val) => {
+    const die = document.createElement("div");
+    die.className = "die-defender";
+    die.textContent = val;
+    defenderRow.appendChild(die);
+  });
+
+  arena.appendChild(attackerRow);
+  arena.appendChild(defenderRow);
+}
