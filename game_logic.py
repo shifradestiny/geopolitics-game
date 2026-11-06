@@ -57,6 +57,11 @@ class Game:
         starting_country = random.choice(self.countries)
         starting_country.owner = "player"
 
+        # Always choose a starting player with at least more than 3 soldiers
+        if starting_country.soldiers < 3:
+            starting_country.soldiers = 3
+            starting_country.base_soldier_value = 3
+
         self.game_over = False
         self.winner = None
 
@@ -83,7 +88,7 @@ class Game:
             if attacker_dice[i] > defender_dice[i]:
                 defender.soldiers -= 1
                 defender_loss += 1
-            else:
+            elif attacker_dice[i] < defender_dice[i]:
                 attacker.soldiers -= 1
                 attacker_loss += 1
 
@@ -93,13 +98,13 @@ class Game:
         if defender.soldiers <= 0:
             captured = True
             defender.owner = attacker.owner  # Being captured shifts ownership
-            defender.soldiers = defender.base_soldier_value
-            attacker.soldiers += 1
+            defender.soldiers = max(1, attacker.soldiers - 1)
+            attacker.soldiers = 1
         elif attacker.soldiers <= 0:
             captured = True
             attacker.owner = defender.owner  # Being captured shifts ownership
-            attacker.soldiers = attacker.base_soldier_value
-            defender.soldiers += 1
+            attacker.soldiers = max(1, defender.soldiers - 1)
+            defender.soldiers = 1
         else:
             captured = False
 
@@ -156,8 +161,12 @@ class Game:
             elif player_type.owner == "player":
                 player_countries.append(player_type)
 
-        npc_attacker = random.choice(npc_countries)
-        player_defender = random.choice(player_countries)
+        # Stongest NPC attacks weakest player
+        npc_countries.sort(key=lambda c: c.soldiers, reverse=True)
+        player_countries.sort(key=lambda c: c.soldiers)
+
+        npc_attacker = npc_countries[0]
+        player_defender = player_countries[0]
 
         # BOT LOGIC 
         if npc_attacker.soldiers > player_defender.soldiers:
