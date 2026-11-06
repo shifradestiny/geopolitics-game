@@ -15,6 +15,10 @@
   <body>
     <div class="container">
       <h2>Geopolitics Game - Create Account</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      message %} {% for category, message in messages %}
+      <div class="flash-message" {{ category}}>{{ message}}</div>
+      {% endfor %} {% endif %} {% endwith %}
       <form action="/register" method="POST">
         <input
           type="text"

@@ -42,3 +42,20 @@ a {
   color: #79fa99;
   text-decoration: none;
 }
+
+.flash-message {
+  margin-bottom: 15px;
+  font-weight: bold;
+  background-color: #111622;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.flash-message.error {
+  color: #ff4c4c;
+}
+
+.flash-message.success {
+  color: #79fa99;
+}

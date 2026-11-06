@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, session, redirect, url_for
+from flask import Flask, jsonify, render_template, request, session, redirect, url_for, flash
 from game_logic import Game
 from database import db
 import os
@@ -63,9 +63,10 @@ def register():
         password = request.form.get("password")
 
         if db.register_user(username, password):
+            flash("Account created! Please login.", "success")
             return redirect(url_for("login"))
         else:
-            return "Username already being used. Please try a different username.", 400
+            flash("Username already being used. Please try a different username.", "error")
 
     return render_template("register.html")
 
@@ -79,7 +80,7 @@ def login():
             session["username"] = username
             return redirect(url_for("index"))
         else:
-            return "Invalid login details.", 401
+            flash("Invalid login details.", "error")
 
     return render_template("login.html")
 
